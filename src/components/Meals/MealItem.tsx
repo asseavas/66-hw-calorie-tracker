@@ -18,7 +18,7 @@ const MealItem: React.FC<Props> = ({ meal, onDelete, isLoading }) => {
         <strong className="card-text mt-3">{meal.calories} kcal</strong>
         <div className="d-flex gap-3 ms-auto">
           <Link
-            to={'/meals/' + meal.id + '/edit'}
+            to={'/edit-meal/' + meal.id}
             className="btn btn-primary px-4 rounded-3 ms-auto"
           >
             {isLoading && <ButtonSpinner />}
