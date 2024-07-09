@@ -21,7 +21,6 @@ const MealItem: React.FC<Props> = ({ meal, onDelete, isLoading }) => {
             to={'/edit-meal/' + meal.id}
             className="btn btn-primary px-4 rounded-3 ms-auto"
           >
-            {isLoading && <ButtonSpinner />}
             Edit
           </Link>
           <button className="btn btn-danger px-4 rounded-3" onClick={onDelete}>

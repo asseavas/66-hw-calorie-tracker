@@ -9,6 +9,7 @@ import Spinner from '../../components/Spinner/Spinner';
 const Home = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(false);
+  const [totalCalories, setTotalCalories] = useState(0);
   const location = useLocation();
 
   const fetchMeals = useCallback(async () => {
@@ -20,6 +21,7 @@ const Home = () => {
 
       if (!meals) {
         setMeals([]);
+        setTotalCalories(0);
       } else {
         const newMeals = Object.keys(meals).map((id) => ({
           ...meals[id],
@@ -27,6 +29,9 @@ const Home = () => {
         }));
 
         setMeals(newMeals);
+
+        const calories = newMeals.reduce((sum, meal) => sum + meal.calories, 0);
+        setTotalCalories(calories);
       }
     } finally {
       setLoading(false);
@@ -35,12 +40,12 @@ const Home = () => {
 
   const deleteMeal = async (id: string) => {
     try {
-      setLoading(true);
       if (window.confirm('Are you sure you want to delete?')) {
         await axiosApi.delete(`/meals/${id}.json`);
-        setLoading(false);
+        setLoading(true);
         await fetchMeals();
         toast.success('Meal deleted!');
+        setLoading(false);
       }
     } catch (e) {
       toast.error('Could not delete this meal!');
@@ -55,8 +60,11 @@ const Home = () => {
 
   return (
     <div className="d-flex flex-column align-items-center gap-3">
-      <div>
-        <NavLink to="/new-meal" className="btn btn-primary">
+      <div className="d-flex gap-5 align-items-center">
+        <p>
+          Total calories: <strong>{totalCalories} kcal</strong>
+        </p>
+        <NavLink to="/new-meal" className="btn btn-primary d-flex ms-auto">
           Add new meal
         </NavLink>
       </div>
