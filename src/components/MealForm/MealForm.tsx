@@ -51,9 +51,10 @@ const MealForm: React.FC<Props> = ({
     >
       <h4>{existingMeal ? 'Edit meal' : 'Add new meal'}</h4>
       <div className="form-group pt-3">
+        <label htmlFor="time">Time</label>
         <select
           name="time"
-          className="form-select bg-body-secondary border-0 rounded-3 p-2 mb-3"
+          className="form-select bg-body-secondary border-0 rounded-3 p-2 mb-3 mt-2"
           aria-label="Default select example"
           required
           onChange={changeMeal}
@@ -68,27 +69,27 @@ const MealForm: React.FC<Props> = ({
           <option value="dinner">Dinner</option>
         </select>
       </div>
-      <div className="form-group">
+      <div className="form-group pt-2">
         <label htmlFor="description">Meal description</label>
         <textarea
           name="description"
           id="description"
           required
-          className="form-control mb-3 bg-body-secondary border-0 rounded-3 p-2"
+          className="form-control mb-3 bg-body-secondary border-0 rounded-3 p-2 mt-2"
           onChange={changeMeal}
           value={mealMutation.description}
         />
       </div>
-      <div className="form-group">
+      <div className="form-group pt-2">
         <label htmlFor="calories">Calories</label>
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
           <input
             type="number"
             name="calories"
             id="calories"
             required
             min="1"
-            className="form-control w-25 bg-body-secondary border-0 rounded-3 p-2"
+            className="form-control w-25 bg-body-secondary border-0 rounded-3 p-2 mt-2"
             onChange={changeMeal}
             value={mealMutation.calories}
           />
